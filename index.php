@@ -9,14 +9,10 @@ $urlShorter = new UrlShorter(array(
 if ($_GET["path"] == ""){
     $valid = isset($_POST["url"]) and !empty($_POST["url"]);
     if ($valid) {
-
-
         /**
          * Call Once For Create Table
          */
-        //$urlShorter->create_table();
-
-
+        $urlShorter->create_table();
         /**
          * Call For Add new Url
          */
@@ -26,11 +22,7 @@ if ($_GET["path"] == ""){
     /**
      * Go To URL
      */
-
-
     $link = json_decode(json_encode($urlShorter->getUrl($_GET["path"])),true)[0]["url"];
-
-
     header("location:$link");
 }
 ?>
@@ -74,4 +66,3 @@ if ($_GET["path"] == ""){
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 </html>
-
