@@ -1,15 +1,16 @@
 <?php
 require_once "UrlShorter.php";
 use AryanDev\UrlShorter\UrlShorter;
-
 $urlShorter = new UrlShorter(array(
-    "dbname" => "url",
-    "username" => "root",
-    "password" => ""
+    "dbname" => "aryandev_url",
+    "username" => "aryandev_url",
+    "password" => "IranIran83#"
 ));
-if ($_GET["path"] == "") {
+if ($_GET["path"] == ""){
     $valid = isset($_POST["url"]) and !empty($_POST["url"]);
     if ($valid) {
+
+
         /**
          * Call Once For Create Table
          */
@@ -19,13 +20,17 @@ if ($_GET["path"] == "") {
         /**
          * Call For Add new Url
          */
-        $url = $urlShorter->insertNewUrl($_POST["url"], $_SERVER["REQUEST_URI"], $_SERVER["HTTP_ORIGIN"]);
+        $url = $urlShorter->insertNewUrl($_POST["url"],$_SERVER["REQUEST_URI"],$_SERVER["HTTP_ORIGIN"]);
     }
-} else {
+}else{
     /**
      * Go To URL
      */
-    $link = json_decode(json_encode($urlShorter->getUrl($_GET["path"])), true)[0]["url"];
+
+
+    $link = json_decode(json_encode($urlShorter->getUrl($_GET["path"])),true)[0]["url"];
+
+
     header("location:$link");
 }
 ?>
@@ -48,25 +53,26 @@ if ($_GET["path"] == "") {
 <body>
 <section class=" container-fluid "
          style="background-color:#ececec;">
-    <div class="row d-flex justify-content-center fullscreen align-items-center">
+    <div class="row d-flex justify-content-center fullscreen align-items-center p-2">
         <?php
         if ($valid) {
             echo '
-            <div class="alert col-12 alert-dismissible alert-success fade show">
-            ' . "<a href='$url' class='alert-link'>$url</a>" . '
+            <div class="alert alert-dismissible alert-success fade show">
+            '."<a href='$url' class='alert-link'>$url</a>".'
              <span class="btn-close" data-bs-dismiss="alert"></span>
             </div>
         ';
         }
         ?>
-        <div class="col-8 bg-light h-75 p-5 justify-content-center align-items-center d-flex row">
-            <form action="" method="post" class="text-center col-12">
-                <label for="url" class="form-label"> URL: </label>
-                <input type="url" name="url" id="url" required class="form-control">
-                <button class="btn btn-outline-danger m-2"> کوتاهش کن</button>
-            </form>
-        </div>
+    <div class="col-xl-8 col-lg-8 col-11 bg-light h-75 justify-content-center align-items-center d-flex row">
+        <form action="" method="post" class="text-center col-12">
+            <label for="url" class="form-label"> URL: </label>
+            <input type="url" name="url" id="url" required class="form-control">
+            <button class="btn btn-outline-danger m-2"> کوتاهش کن</button>
+        </form>
     </div>
+    </div>
+    
 </section>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
