@@ -12,7 +12,9 @@ if ($_GET["path"] == ""){
         /**
          * Call Once For Create Table
          */
-        $urlShorter->create_table();
+        //$urlShorter->create_table();
+        
+        
         /**
          * Call For Add new Url
          */
@@ -45,7 +47,7 @@ if ($_GET["path"] == ""){
 <body>
 <section class="d-flex justify-content-center fullscreen container-fluid align-items-center"
          style="background-color:#ececec;">
-    <div class="col-8 bg-light h-75 p-5 justify-content-center align-items-center d-flex row">
+    <div class="col-lg-8 col-xl-8 col-11 bg-light h-75 p-5 justify-content-center align-items-center d-flex row">
         <form action="" method="post" class="text-center">
             <label for="url" class="form-label"> URL: </label>
             <input type="url" name="url" id="url" required class="form-control">
