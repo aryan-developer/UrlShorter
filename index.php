@@ -24,11 +24,7 @@ if ($_GET["path"] == ""){
     /**
      * Go To URL
      */
-
-
     $link = json_decode(json_encode($urlShorter->getUrl($_GET["path"])),true)[0]["url"];
-
-
     header("location:$link");
 }
 ?>
