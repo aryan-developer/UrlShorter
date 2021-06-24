@@ -1,3 +1,3 @@
 # UrlShorter
 
-urlshorter.aryandev.ir Example
+http://urlshorter.aryandev.ir Example
