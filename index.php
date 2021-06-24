@@ -9,8 +9,6 @@ $urlShorter = new UrlShorter(array(
 if ($_GET["path"] == ""){
     $valid = isset($_POST["url"]) and !empty($_POST["url"]);
     if ($valid) {
-
-
         /**
          * Call Once For Create Table
          */
