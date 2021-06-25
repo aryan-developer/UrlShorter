@@ -2,18 +2,18 @@
 require_once "UrlShorter.php";
 use AryanDev\UrlShorter\UrlShorter;
 $urlShorter = new UrlShorter(array(
-    "dbname" => "url",
-    "username" => "root",
-    "password" => ""
+    "dbname" => "aryandev_url",
+    "username" => "aryandev_url",
+    "password" => "IranIran83#"
 ));
 if ($_GET["path"] == ""){
-    $valid = isset($_POST["url"]) and !empty($_POST["url"]);
-    if ($valid) {
+    $showAlertSuccess = isset($_POST["url"]) and !empty($_POST["url"]);
+    $showAlertWarning = false;
+    if ($showAlertSuccess) {
         /**
          * Call Once For Create Table
          */
         //$urlShorter->create_table();
-
 
         /**
          * Call For Add new Url
@@ -24,8 +24,13 @@ if ($_GET["path"] == ""){
     /**
      * Go To URL
      */
-    $link = json_decode(json_encode($urlShorter->getUrl($_GET["path"])),true)[0]["url"];
-    header("location:$link");
+    if(sizeof($urlShorter->getUrl($_GET["path"]))!=0){
+        $link = json_decode(json_encode($urlShorter->getUrl($_GET["path"])),true)[0]["url"];
+    }else{
+        $showAlertWarning = true;
+        $showAlertSuccess = false;
+        $data = "همچین لینکی پیدا نشد!";
+    }
 }
 ?>
 <!doctype html>
@@ -49,10 +54,18 @@ if ($_GET["path"] == ""){
          style="background-color:#ececec;">
     <div class="row d-flex justify-content-center fullscreen align-items-center p-2">
         <?php
-        if ($valid) {
+        if ($showAlertSuccess) {
             echo '
             <div class="alert alert-dismissible alert-success fade show">
-            '."<a href='$url' class='alert-link'>$url</a>".'
+            '."<a href='$data' class='alert-link'>$data</a>".'
+             <span class="btn-close" data-bs-dismiss="alert"></span>
+            </div>
+        ';
+        }
+        if($showAlertWarning){
+            echo '
+            <div class="alert alert-dismissible alert-warning fade show">
+            '."<h6 dir='rtl'>$data</h6>".'
              <span class="btn-close" data-bs-dismiss="alert"></span>
             </div>
         ';
