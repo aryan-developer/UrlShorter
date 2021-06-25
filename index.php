@@ -2,9 +2,9 @@
 require_once "UrlShorter.php";
 use AryanDev\UrlShorter\UrlShorter;
 $urlShorter = new UrlShorter(array(
-    "dbname" => "url",
-    "username" => "root",
-    "password" => ""
+    "dbname" => "aryandev_url",
+    "username" => "aryandev_url",
+    "password" => "IranIran83#"
 ));
 if ($_GET["path"] == ""){
     $showAlertSuccess = isset($_POST["url"]) and !empty($_POST["url"]);
@@ -18,14 +18,15 @@ if ($_GET["path"] == ""){
         /**
          * Call For Add new Url
          */
-        $url = $urlShorter->insertNewUrl($_POST["url"],$_SERVER["REQUEST_URI"],$_SERVER["HTTP_ORIGIN"]);
+        $data = $urlShorter->insertNewUrl($_POST["url"],$_SERVER["REQUEST_URI"],$_SERVER["HTTP_ORIGIN"]);
     }
 }else{
     /**
      * Go To URL
      */
-    if(sizeof($urlShorter->getUrl($_GET["path"]))!=0){
-        $link = json_decode(json_encode($urlShorter->getUrl($_GET["path"])),true)[0]["url"];
+    if(sizeof(json_decode(json_encode($urlShorter->getUrl($_GET["path"])),true))!=0){
+        $data = json_decode(json_encode($urlShorter->getUrl($_GET["path"])),true)[0]["url"];
+        header("location:$data");
     }else{
         $showAlertWarning = true;
         $showAlertSuccess = false;
@@ -72,7 +73,7 @@ if ($_GET["path"] == ""){
         }
         ?>
     <div class="col-xl-8 col-lg-8 col-11 bg-light h-75 justify-content-center align-items-center d-flex row">
-        <form action="" method="post" class="text-center col-12">
+        <form action="/" method="post" class="text-center col-12">
             <label for="url" class="form-label"> URL: </label>
             <input type="url" name="url" id="url" required class="form-control">
             <button class="btn btn-outline-danger m-2"> کوتاهش کن</button>
