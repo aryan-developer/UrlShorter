@@ -2,9 +2,9 @@
 require_once "UrlShorter.php";
 use AryanDev\UrlShorter\UrlShorter;
 $urlShorter = new UrlShorter(array(
-    "dbname" => "aryandev_url",
-    "username" => "aryandev_url",
-    "password" => "IranIran83#"
+    "dbname" => "url",
+    "username" => "root",
+    "password" => ""
 ));
 if ($_GET["path"] == ""){
     $showAlertSuccess = isset($_POST["url"]) and !empty($_POST["url"]);
